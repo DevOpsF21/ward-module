@@ -25,10 +25,12 @@ pipeline {
       
         stage('Run Docker Container Locally') {
             steps {
-                script {
-                    // bat "docker stop ${CONTAINER_NAME} || exit 0"
-                    // bat "docker rm ${CONTAINER_NAME} || exit 0"
-                    bat "docker run -d --name ${CONTAINER_NAME} -p 3000:9191 ${IMAGE_FULL_NAME}"
+                 script {
+                    // Stop and remove the existing container if running
+                    bat "docker stop ${CONTAINER_NAME} || true"
+                    bat "docker rm ${CONTAINER_NAME} || true"
+                    // Run the new container with the updated image on port 3000
+                    bat "docker run -d --name ${CONTAINER_NAME} -p 3000:3000 ${IMAGE_FULL_NAME}"
                 }
             }
         }
