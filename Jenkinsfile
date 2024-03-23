@@ -23,17 +23,21 @@ pipeline {
             }
         }
       
-        stage('Run Docker Container Locally') {
-            steps {
-                script {
-                    // bat "docker stop ${CONTAINER_NAME} || exit 0"
-                    // bat "docker rm ${CONTAINER_NAME} || exit 0"
-                    bat "docker run -d --name ${CONTAINER_NAME} -p 3000:9191 ${IMAGE_FULL_NAME}"
-                }
-            }
+      stage('Run Docker Container Locally') {
+         steps {
+           script {
+            // Step 1: Stop existing Docker container
+            bat label: 'Stop Existing Container', script: "docker stop ${CONTAINER_NAME} || exit 0"
+            
+            // Step 2: Remove existing Docker container
+            bat label: 'Remove Existing Container', script: "docker rm ${CONTAINER_NAME} || exit 0"
+            
+            // Step 3: Run new Docker container
+            bat label: 'Run New Container', script: "docker run -d --name ${CONTAINER_NAME} -p 3000:9191 ${IMAGE_FULL_NAME}"
+           }
+         }
         }
 
- 
         stage('Deploying to Minikube') {
             steps {
                 script {
