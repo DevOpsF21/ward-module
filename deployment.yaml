@@ -17,3 +17,4 @@ spec:
         image: ward-module:v1.0  # Replace ${BUILD_NUMBER} with your actual build number
         ports:
         - containerPort: 9191
+        - name: myregistrykey
