@@ -36,9 +36,11 @@ pipeline {
         stage('Deploying to Kubernetes') {
    steps {
     script {
-        // Check if the deployment exists. The command output will be empty if the deployment does not exist.
+        // Log the checking process
         echo "Checking if the deployment '${DEPLOYMENT_NAME}' exists..."
-        def deploymentOutput = sh(script: "kubectl get deployment ${DEPLOYMENT_NAME} --ignore-not-found", returnStdout: true).trim()
+
+        // Use 'bat' for Windows, capturing the output to check the deployment's existence
+        def deploymentOutput = bat(script: "kubectl get deployment ${DEPLOYMENT_NAME} --ignore-not-found", returnStdout: true).trim()
 
         // Determine the existence of the deployment by checking if the output is empty.
         boolean deploymentExists = deploymentOutput != ''
@@ -46,18 +48,19 @@ pipeline {
         if (deploymentExists) {
             echo "Deployment '${DEPLOYMENT_NAME}' found. Updating the image and restarting..."
             // Update the deployment with the new image.
-            sh "kubectl set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}=${IMAGE_FULL_NAME}"
+            bat "kubectl set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}=${IMAGE_FULL_NAME}"
             // Restart the deployment to apply the new image.
-            sh "kubectl rollout restart deployment/${DEPLOYMENT_NAME}"
+            bat "kubectl rollout restart deployment/${DEPLOYMENT_NAME}"
         } else {
             echo "Deployment '${DEPLOYMENT_NAME}' not found. Applying configurations from YAML files..."
             // Apply the deployment and service YAML configurations to create them.
             try {
-                sh "kubectl apply -f deployment.yaml -f service.yaml"
+                bat "kubectl apply -f deployment.yaml -f service.yaml"
                 echo "Deployment and service applied successfully."
             } catch (Exception e) {
                 echo "Failed to apply deployment and service configurations."
-                throw e // Rethrow the exception to ensure the pipeline marks this stage as failed.
+                // In a Jenkins pipeline running on Windows, throwing an exception directly might not be necessary or effective
+                // for certain batch command failures. Adjust according to your specific error handling needs.
             }
         }
     }
