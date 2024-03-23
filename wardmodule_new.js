@@ -27,7 +27,7 @@ mongoose.connect(process.env.DATABASE_URL)
     .then(() => console.log('DB is connected!'))
     .catch((err) => console.error('Unable to connect to DB.', err));
 
-const { connectToDb, getDb } = require("/app/auth/db");
+const { connectToDb, getDb } = require("/db");
 // Make sure to call connectToDb before starting the server
 connectToDb((err) => {
     if (err) {
