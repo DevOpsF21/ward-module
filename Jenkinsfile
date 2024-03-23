@@ -26,8 +26,8 @@ pipeline {
         stage('Run Docker Container Locally') {
             steps {
                 script {
-                    bat "docker stop ${CONTAINER_NAME} || exit 0"
-                    bat "docker rm ${CONTAINER_NAME} || exit 0"
+                    // bat "docker stop ${CONTAINER_NAME} || exit 0"
+                    // bat "docker rm ${CONTAINER_NAME} || exit 0"
                     bat "docker run -d --name ${CONTAINER_NAME} -p 3000:3000 ${IMAGE_FULL_NAME}"
                 }
             }
