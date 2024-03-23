@@ -38,20 +38,20 @@ pipeline {
             steps {
                 script {
                     // Ensure kubectl is using Minikube's Docker environment
-                    sh 'eval $(minikube -p minikube docker-env)'
+                    bat 'eval $(minikube -p minikube docker-env)'
                     
                     // Check if the deployment exists
-                    def deploymentExists = sh(script: "kubectl get deployment ${DEPLOYMENT_NAME}", returnStatus: true) == 0
+                    def deploymentExists = bat(script: "kubectl get deployment ${DEPLOYMENT_NAME}", returnStatus: true) == 0
 
                     if (deploymentExists) {
                         // Update the deployment to use the new Docker image
-                        sh "kubectl set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}=${IMAGE_FULL_NAME}"
+                        bat "kubectl set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}=${IMAGE_FULL_NAME}"
                         
                         // Restart the pods
-                        sh "kubectl rollout restart deployment/${DEPLOYMENT_NAME}"
+                        bat "kubectl rollout restart deployment/${DEPLOYMENT_NAME}"
                     } else {
                         // Apply the deployment and service YAML files
-                        sh "kubectl apply -f deployment.yaml -f service.yaml"
+                        bat "kubectl apply -f deployment.yaml -f service.yaml"
                     }
                 }
             }
