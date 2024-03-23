@@ -23,13 +23,7 @@ pipeline {
             }
         }
         stage('Deploy to Kubernetes') {
-            steps {
-                script {
-                    // Execute kubectl commands
-                    bat 'kubectl cluster-info' // Corrected command
-                    // Other kubectl commands can be added here
-                }
-            }
+           
         }
         stage('Run Docker Container Locally') {
             steps {
