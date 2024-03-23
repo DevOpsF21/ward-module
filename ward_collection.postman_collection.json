@@ -1,0 +1,308 @@
+{
+	"info": {
+		"_postman_id": "34f61a48-37e7-4075-a425-c8673864bef8",
+		"name": "ward_collection",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32840191"
+	},
+	"item": [
+		{
+			"name": "Check Admission- Valid",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n            \"pid\":77778888,\r\n            \"dep\":\"Medicine\",\r\n            \"wname\":\"Medicine A\",\r\n            \"ad\":\"2024-02-20T13:30:45\",\r\n            \"edd\":\"2024-02-20\"\r\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/v1/inpatient/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"inpatient",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Check Admission- Invalid",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n            \"pid\":77778888,\r\n            \"dep\":\"Medicine\",\r\n            \"wname\":\"Medicine A\",\r\n            \"ad\":\"2024-02-20T13:30:45\",\r\n            \"edd\":\"2024-02-20\"\r\n        }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "localhost:3000/v1/inpatient/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"inpatient",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Discharge a Valid Patient",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/v1/discharge/:pid",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"discharge",
+						":pid"
+					],
+					"variable": [
+						{
+							"key": "pid",
+							"value": "77771133"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Discharge Invalid Patient",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/v1/discharge/:pid",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"discharge",
+						":pid"
+					],
+					"variable": [
+						{
+							"key": "pid",
+							"value": "77771133"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get- view all patients who has discharge form readyv1/discharge/-True",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:3000/v1/discharge/",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"v1",
+						"discharge",
+						""
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Get Patient Status",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9191/v1/inpatient/:pid/",
+					"host": [
+						"localhost"
+					],
+					"port": "9191",
+					"path": [
+						"v1",
+						"inpatient",
+						":pid",
+						""
+					],
+					"variable": [
+						{
+							"key": "pid",
+							"value": "77778888"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "vitalsigns/bp",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9191/v1/inpatient/77778888/vitalsigns/bp",
+					"host": [
+						"localhost"
+					],
+					"port": "9191",
+					"path": [
+						"v1",
+						"inpatient",
+						"77778888",
+						"vitalsigns",
+						"bp"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "vitalsigns/cardiac",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9191/v1/inpatient/77778888/vitalsigns/cardiac",
+					"host": [
+						"localhost"
+					],
+					"port": "9191",
+					"path": [
+						"v1",
+						"inpatient",
+						"77778888",
+						"vitalsigns",
+						"cardiac"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "vitalsigns/temprature",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9191/v1/inpatient/77778888/vitalsigns/temprature",
+					"host": [
+						"localhost"
+					],
+					"port": "9191",
+					"path": [
+						"v1",
+						"inpatient",
+						"77778888",
+						"vitalsigns",
+						"temprature"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Report",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9191/v1/inpatient/77778888/report",
+					"host": [
+						"localhost"
+					],
+					"port": "9191",
+					"path": [
+						"v1",
+						"inpatient",
+						"77778888",
+						"report"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Medication",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9191/v1/inpatient/:pid/discharge_form",
+					"host": [
+						"localhost"
+					],
+					"port": "9191",
+					"path": [
+						"v1",
+						"inpatient",
+						":pid",
+						"discharge_form"
+					],
+					"variable": [
+						{
+							"key": "pid",
+							"value": "77778888"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Discharge_form",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "localhost:9191/v1/inpatient/:pid/discharge_form",
+					"host": [
+						"localhost"
+					],
+					"port": "9191",
+					"path": [
+						"v1",
+						"inpatient",
+						":pid",
+						"discharge_form"
+					],
+					"variable": [
+						{
+							"key": "pid",
+							"value": "77778888"
+						}
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

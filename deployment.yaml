@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ward-module-deployment
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: ward-module
+  template:
+    metadata:
+      labels:
+        app: ward-module
+    spec:
+      containers:
+      - name: ward-module
+        image: ward-module:v1.0.${BUILD_NUMBER}  # Replace ${BUILD_NUMBER} with your actual build number
+        ports:
+        - containerPort: 9191
