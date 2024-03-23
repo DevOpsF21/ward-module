@@ -21,7 +21,6 @@ const { verifyToken, verifyRoles } = require('./authMiddleware');
 const inpatientops = require('./dbops/inpatientops');
 const dischargeops = require('./dbops/dischargeops');
 const port = 9191;
-
 //Here connection to DB using the variables from the .env
 mongoose.connect(process.env.DATABASE_URL)
     .then(() => console.log('DB is connected!'))
