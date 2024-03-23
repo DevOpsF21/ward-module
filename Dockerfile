@@ -9,7 +9,6 @@ COPY package.json package-lock.json /app/wrd/
 COPY wardmodule_new.js /app/wrd/
 COPY createwards.js /app/wrd/
 COPY .env /app/wrd/
-COPY node_modules/ /app/wrd/ 
 COPY dbops/dischargeops.js dbops/inpatientops.js dbops/wardops.js  /app/wrd/dbops/
 COPY authMiddleware.js /app/wrd/middleware/
 
