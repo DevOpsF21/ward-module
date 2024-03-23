@@ -38,7 +38,7 @@ pipeline {
             steps {
                 script {
                     // Ensure kubectl is using Minikube's Docker environment
-                    bat 'eval $(minikube -p minikube docker-env)'
+                    bat 'minikube -p minikube docker-env'
                     
                     // Check if the deployment exists
                     def deploymentExists = bat(script: "kubectl get deployment ${DEPLOYMENT_NAME}", returnStatus: true) == 0
