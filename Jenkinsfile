@@ -22,7 +22,15 @@ pipeline {
                 bat "docker build -t ${IMAGE_FULL_NAME} ."
             }
         }
-
+        stage('Deploy to Kubernetes') {
+            steps {
+                script {
+                    // Execute kubectl commands
+                    sh 'kubectl cluster-info' // Corrected command
+                    // Other kubectl commands can be added here
+                }
+            }
+        }
         stage('Run Docker Container Locally') {
             steps {
                 script {
@@ -32,17 +40,7 @@ pipeline {
                 }
             }
         }
-  stages {
-        stage('Kubernetes Cluster Info') {
-            steps {
-                script {
-                    // Assuming kubectl is installed and PATH is correctly set
-                    def kubeInfo = bat script: "kubectl cluster-info", returnStdout: true
-                    echo "Kubernetes Cluster Info: ${kubeInfo}"
-                }
-            }
-        }
-    
+
         stage('Deploying to Kubernetes') {
             steps {
                 script {
