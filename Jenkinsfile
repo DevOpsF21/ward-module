@@ -29,7 +29,7 @@ pipeline {
 
         stage('Building Docker Image') {
             steps {
-                sh "docker build -t ${IMAGE_FULL_NAME} ."
+                cmd "docker build -t ${IMAGE_FULL_NAME} ."
             }
         }
 
@@ -39,7 +39,6 @@ pipeline {
                     // Stop and remove the existing container if running
                     sh "docker stop ${CONTAINER_NAME} || true"
                     sh "docker rm ${CONTAINER_NAME} || true"
-
                     // Run the new container with the updated image on port 3000
                     sh "docker run -d --name ${CONTAINER_NAME} -p 3000:3000 ${IMAGE_FULL_NAME}"
                 }
