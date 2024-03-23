@@ -73,14 +73,18 @@ pipeline {
                 }
             }
         }
-
-        stage('Verify Deployment') {
-            steps {
-                script {
-                    bat "kubectl rollout status deployment/${DEPLOYMENT_NAME}"
-                    bat "kubectl get pods --selector=app=${CONTAINER_NAME}"
-                }
-            }
+stage('Verify Deployment') {
+    steps {
+        script {
+            // Check the rollout status of the deployment. This command waits until the deployment is done or fails.
+            bat "kubectl rollout status deployment/${DEPLOYMENT_NAME}"
+            
+            // After checking the rollout status, list the pods with a specific label to see their current status.
+            // This can be useful for debugging if there are issues with the rollout.
+            bat "kubectl get pods --selector=app=${CONTAINER_NAME}"
         }
+    }
+}
+
     }
 }
