@@ -6,17 +6,18 @@ RUN mkdir -p /app/wrd /app/wrd/middleware
 
 # Copy package.json and package-lock.json 
 COPY package.json package-lock.json /app/wrd/
-
-
-# Install dependencies
-RUN npm install
-# Copy the rest of the application files
 COPY wardmodule_new.js /app/wrd/
 COPY createwards.js /app/wrd/
 COPY .env /app/wrd/
 COPY dbops/dischargeops.js dbops/inpatientops.js dbops/wardops.js  /app/wrd/dbops/
-COPY authMiddleware.js /app/wrd/middleware/
+COPY authMiddleware.js /app/wrd/
+COPY db.js /app/wrd/
+
+# Install dependencies
+RUN npm install
+# Copy the rest of the application files
+
 # Expose port, wil lthis override the port specificed in the code?
-EXPOSE 3000 
+EXPOSE 9191 
 # Specify the entry point
 CMD ["node", "wardmodule_new.js"] 
