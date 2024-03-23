@@ -26,7 +26,7 @@ pipeline {
             steps {
                 script {
                     // Execute kubectl commands
-                    sh 'kubectl cluster-info' // Corrected command
+                    bat 'kubectl cluster-info' // Corrected command
                     // Other kubectl commands can be added here
                 }
             }
