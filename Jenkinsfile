@@ -22,9 +22,7 @@ pipeline {
                 bat "docker build -t ${IMAGE_FULL_NAME} ."
             }
         }
-        stage('Deploy to Kubernetes') {
-           
-        }
+      
         stage('Run Docker Container Locally') {
             steps {
                 script {
