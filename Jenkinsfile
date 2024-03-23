@@ -42,18 +42,19 @@ pipeline {
         }
 
         stage('Deploying to Kubernetes') {
-            steps {
-                script {
-                    def deploymentExists = bat(script: "kubectl get deployment ${DEPLOYMENT_NAME}", returnStatus: true) == 0
-                    if (deploymentExists) {
-                        bat "kubectl set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}=${IMAGE_FULL_NAME}"
-                        bat "kubectl rollout restart deployment/${DEPLOYMENT_NAME}"
-                    } else {
-                        bat "kubectl apply -f deployment.yaml -f service.yaml"
-                    }
-                }
+    steps {
+        script {
+            def deploymentExists = sh(script: "kubectl get deployment ${DEPLOYMENT_NAME} --ignore-not-found", returnStdout: true).trim()
+            if (deploymentExists) {
+                sh "kubectl set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}=${IMAGE_FULL_NAME}"
+                sh "kubectl rollout restart deployment/${DEPLOYMENT_NAME}"
+            } else {
+                sh "kubectl apply -f deployment.yaml -f service.yaml"
             }
         }
+    }
+}
+
 
         stage('Postman Testing') {
             steps {
