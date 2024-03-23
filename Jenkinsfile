@@ -33,40 +33,29 @@ pipeline {
             }
         }
 
-        stage('Deploying to Kubernetes') {
-   steps {
-    script {
-        // Log the checking process
-        echo "Checking if the deployment '${DEPLOYMENT_NAME}' exists..."
+ 
+        stage('Deploying to Minikube') {
+            steps {
+                script {
+                    // Ensure kubectl is using Minikube's Docker environment
+                    sh 'eval $(minikube -p minikube docker-env)'
+                    
+                    // Check if the deployment exists
+                    def deploymentExists = sh(script: "kubectl get deployment ${DEPLOYMENT_NAME}", returnStatus: true) == 0
 
-        // Use 'bat' for Windows, capturing the output to check the deployment's existence
-        def deploymentOutput = bat(script: "kubectl get deployment ${DEPLOYMENT_NAME} --ignore-not-found", returnStdout: true).trim()
-
-        // Determine the existence of the deployment by checking if the output is empty.
-        boolean deploymentExists = deploymentOutput != ''
-
-        if (deploymentExists) {
-            echo "Deployment '${DEPLOYMENT_NAME}' found. Updating the image and restarting..."
-            // Update the deployment with the new image.
-            bat "kubectl set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}=${IMAGE_FULL_NAME}"
-            // Restart the deployment to apply the new image.
-            bat "kubectl rollout restart deployment/${DEPLOYMENT_NAME}"
-        } else {
-            echo "Deployment '${DEPLOYMENT_NAME}' not found. Applying configurations from YAML files..."
-            // Apply the deployment and service YAML configurations to create them.
-            try {
-                bat "kubectl apply -f deployment.yaml -f service.yaml"
-                echo "Deployment and service applied successfully."
-            } catch (Exception e) {
-                echo "Failed to apply deployment and service configurations."
-                // In a Jenkins pipeline running on Windows, throwing an exception directly might not be necessary or effective
-                // for certain batch command failures. Adjust according to your specific error handling needs.
+                    if (deploymentExists) {
+                        // Update the deployment to use the new Docker image
+                        sh "kubectl set image deployment/${DEPLOYMENT_NAME} ${CONTAINER_NAME}=${IMAGE_FULL_NAME}"
+                        
+                        // Restart the pods
+                        sh "kubectl rollout restart deployment/${DEPLOYMENT_NAME}"
+                    } else {
+                        // Apply the deployment and service YAML files
+                        sh "kubectl apply -f deployment.yaml -f service.yaml"
+                    }
+                }
             }
         }
-    }
-}
-
-}
 
 
         stage('Postman Testing') {
