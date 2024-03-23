@@ -3,7 +3,7 @@ pipeline {
 
     environment {
         DOCKER_IMAGE = "ward-module"
-        DOCKER_TAG = "v1.0.${BUILD_NUMBER}"
+        DOCKER_TAG = "v1.0"
         IMAGE_FULL_NAME = "${DOCKER_IMAGE}:${DOCKER_TAG}"
         DEPLOYMENT_NAME = "ward-module-deployment"
         CONTAINER_NAME = "ward-module"
