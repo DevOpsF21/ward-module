@@ -142,11 +142,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:9191/v1/inpatient/:pid/",
+					"raw": "localhost:3000/v1/inpatient/:pid/",
 					"host": [
 						"localhost"
 					],
-					"port": "9191",
+					"port": "3000",
 					"path": [
 						"v1",
 						"inpatient",
@@ -169,11 +169,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:9191/v1/inpatient/77778888/vitalsigns/bp",
+					"raw": "localhost:3000/v1/inpatient/77778888/vitalsigns/bp",
 					"host": [
 						"localhost"
 					],
-					"port": "9191",
+					"port": "3000",
 					"path": [
 						"v1",
 						"inpatient",
@@ -191,11 +191,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:9191/v1/inpatient/77778888/vitalsigns/cardiac",
+					"raw": "localhost:3000/v1/inpatient/77778888/vitalsigns/cardiac",
 					"host": [
 						"localhost"
 					],
-					"port": "9191",
+					"port": "3000",
 					"path": [
 						"v1",
 						"inpatient",
@@ -213,11 +213,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:9191/v1/inpatient/77778888/vitalsigns/temprature",
+					"raw": "localhost:3000/v1/inpatient/77778888/vitalsigns/temprature",
 					"host": [
 						"localhost"
 					],
-					"port": "9191",
+					"port": "3000",
 					"path": [
 						"v1",
 						"inpatient",
@@ -235,11 +235,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:9191/v1/inpatient/77778888/report",
+					"raw": "localhost:3000/v1/inpatient/77778888/report",
 					"host": [
 						"localhost"
 					],
-					"port": "9191",
+					"port": "3000",
 					"path": [
 						"v1",
 						"inpatient",
@@ -256,11 +256,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:9191/v1/inpatient/:pid/discharge_form",
+					"raw": "localhost:3000/v1/inpatient/:pid/discharge_form",
 					"host": [
 						"localhost"
 					],
-					"port": "9191",
+					"port": "3000",
 					"path": [
 						"v1",
 						"inpatient",
@@ -283,11 +283,11 @@
 				"method": "GET",
 				"header": [],
 				"url": {
-					"raw": "localhost:9191/v1/inpatient/:pid/discharge_form",
+					"raw": "localhost:3000/v1/inpatient/:pid/discharge_form",
 					"host": [
 						"localhost"
 					],
-					"port": "9191",
+					"port": "3000",
 					"path": [
 						"v1",
 						"inpatient",
