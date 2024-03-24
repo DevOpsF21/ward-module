@@ -37,6 +37,20 @@ pipeline {
            }
          }
         }
+      
+      stage('Transfer Image to Minikube') {
+         steps {
+           script {
+            
+            bat "docker save ${IMAGE_FULL_NAME}> image.tar" 
+            // Load the image into Minikube's Docker environment
+            bat "minikube -p minikube image load image.tar"
+
+            //  Clean up the tar file after loading
+             bat " rm image.tar "
+           }
+         }
+        }
 
         stage('Deploying to Minikube') {
             steps {
