@@ -12,7 +12,6 @@ const express = require('express');
 const wardapp = express();
 wardapp.use(express.json())
 const mongoose = require('mongoose');
-const { MongoClient, ObjectId } = require("mongodb");
 require('dotenv/config');
 const bodyParser = require('body-parser');
 const { verifyToken, verifyRoles } = require('./authMiddleware');
