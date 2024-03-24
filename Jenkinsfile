@@ -42,6 +42,8 @@ pipeline {
          steps {
            script {
             
+            bat "minikube -p minikube docker-env" 
+            
             bat "docker save ${IMAGE_FULL_NAME}> image.tar" 
             // Load the image into Minikube's Docker environment
             bat "minikube -p minikube image load image.tar"
