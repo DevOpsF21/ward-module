@@ -15,10 +15,12 @@ pipeline {
 
     stages {
         stage('Preparation') {
-            script {
+            steps {
+                script {
                     // Adjust the PATH to ensure Docker and Minikube commands are accessible
                     env.PATH = "${env.DOCKER_PATH}:${env.MINIKUBE_PATH}:${env.PATH}"
                 }
+            }
         }
 
         stage('Building Docker Image') {
