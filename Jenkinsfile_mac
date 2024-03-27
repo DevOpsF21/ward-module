@@ -51,7 +51,7 @@ pipeline {
                 snykTokenId: 'Snyk_api_token',
                 failOnError: false,
                 failOnIssues: false,
-                --severity-threshold:'high'
+                severity-threshold:'high'
                 )
             }
             }
