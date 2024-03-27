@@ -9,15 +9,16 @@ pipeline {
         CONTAINER_NAME = "ward-module"
         MINIKUBE_PATH = "/opt/homebrew/bin"
         DOCKER_PATH = "/usr/local/bin"
-        // Path to Postman collection file in your Git repository
+        // Path to Postman collection file in yogit initur Git repository
         POSTMAN_COLLECTION = "ward_collection.postman_collection.json"
     }
 
     stages {
         stage('Preparation') {
-            steps {
-                echo 'Preparing the environment...'
-            }
+            script {
+                    // Adjust the PATH to ensure Docker and Minikube commands are accessible
+                    env.PATH = "${env.DOCKER_PATH}:${env.MINIKUBE_PATH}:${env.PATH}"
+                }
         }
 
         stage('Building Docker Image') {
