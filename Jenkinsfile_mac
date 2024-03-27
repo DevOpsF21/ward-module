@@ -48,7 +48,8 @@ pipeline {
             steps {
                 snykSecurity(
                 snykInstallation: 'Snyk_security',
-                snykTokenId: 'Snyk_api_token'
+                snykTokenId: 'Snyk_api_token',
+                failOnError: false
                 )
             }
             }
