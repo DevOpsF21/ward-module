@@ -45,17 +45,17 @@ pipeline {
             }
         }
       
-        /*stage('Testing: Check Doker Image for vulnerability') {
+        stage('Testing: Check Doker Image for vulnerability') {
             steps {
                 snykSecurity(
                 snykInstallation: 'Snyk_security',
                 snykTokenId: 'Snyk_api_token',
                 failOnError: false,
                 failOnIssues: false,
-                severity-threshold:'high'
+                additionalArguments: "--severity-threshold=high"
                 )
             }
-            }*/
+            }
         stage('Transfer Image to Minikube') {
             steps {
                 script {
