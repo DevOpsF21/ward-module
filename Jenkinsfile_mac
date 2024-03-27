@@ -2,7 +2,7 @@ pipeline {
     agent any // Consider using agent labels for specific nodes
 
     environment {
-        SNYK_NAME='Snyk_security'
+        /*SNYK_NAME='Snyk_security'*/
         SNYK_API_TOKEN = credentials('Snyk_api_token')
         DOCKER_IMAGE = "ward-module"
         DOCKER_TAG = "v1.0"
@@ -55,10 +55,14 @@ pipeline {
                 failOnIssues: false,
                 severity-threshold:'high'
                 )*/
-                script {
+                withCredentials([string(credentialsId: 'Snyk_api_token', variable: 'SNYK_API_TOKEN')]) {
+                    // Your steps here that use SNYK_API_TOKEN
+                    sh "echo 'Snyk API Token: $SNYK_API_TOKEN'"
+                }
+                /*script {
                     // Run Snyk security scan with severity threshold
                     sh "tool ${SNYK_NAME} snyk test --severity-threshold=high --api-token=${SNYK_API_TOKEN}"
-                }
+                }*/
             }
             }
         stage('Transfer Image to Minikube') {
