@@ -7,6 +7,9 @@ pipeline {
         IMAGE_FULL_NAME = "${DOCKER_IMAGE}:${DOCKER_TAG}"
         DEPLOYMENT_NAME = "ward-module-deployment"
         CONTAINER_NAME = "ward-module"
+        MINIKUBE_PATH = "/opt/homebrew/bin"
+        DOCKER_PATH = "/usr/local/bin"
+        // Path to Postman collection file in your Git repository
         POSTMAN_COLLECTION = "ward_collection.postman_collection.json"
     }
 
