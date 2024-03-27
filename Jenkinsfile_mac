@@ -47,7 +47,7 @@ pipeline {
         stage('Testing: Check Doker Image for vulnerability') {
             steps {
                 snykSecurity(
-                snykInstallation: 'Snyk',
+                snykInstallation: 'Snyk_security',
                 snykTokenId: 'Snyk_api_token'
                 )
             }
