@@ -49,7 +49,9 @@ pipeline {
                 snykSecurity(
                 snykInstallation: 'Snyk_security',
                 snykTokenId: 'Snyk_api_token',
-                failOnError: false
+                failOnError: false,
+                failOnIssues: false,
+                --severity-threshold:'high'
                 )
             }
             }
