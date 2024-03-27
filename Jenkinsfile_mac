@@ -2,7 +2,7 @@ pipeline {
     agent any // Consider using agent labels for specific nodes
 
     environment {
-        SNYK_API_TOKEN = credentials('Snyk_api_token')
+        /*SNYK_API_TOKEN = credentials('Snyk_api_token')*/
         DOCKER_IMAGE = "ward-module"
         DOCKER_TAG = "v1.0"
         IMAGE_FULL_NAME = "${DOCKER_IMAGE}:${DOCKER_TAG}"
