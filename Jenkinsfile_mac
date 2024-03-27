@@ -44,6 +44,14 @@ pipeline {
             }
         }
       
+        stage('Testing: Check Doker Image for vulnerability') {
+            steps {
+                snykSecurity(
+                snykInstallation: 'Snyk',
+                snykTokenId: 'Snyk_api_token'
+                )
+            }
+            }
         stage('Transfer Image to Minikube') {
             steps {
                 script {
