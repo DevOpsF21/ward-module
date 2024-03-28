@@ -28,7 +28,8 @@ pipeline {
                                "\"tags\": [\"environment:minikube\", \"branch:${env.BRANCH_NAME}\"], " +
                                "\"alert_type\": \"info\"}' " +
                                "https://api.datadoghq.com/api/v1/events?api_key=${DATADOG_API_KEY}"
-                        }
+                        
+                        } 
                     }
                 }
             }
