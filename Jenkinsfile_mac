@@ -15,7 +15,7 @@ pipeline {
 
     stages {
         stage('Notify Deployment Start') {
-            """
+            
             steps {
                 script {
                     if (env.BRANCH_NAME == 'main') {
@@ -30,7 +30,7 @@ pipeline {
                                "https://api.datadoghq.com/api/v1/events?api_key=${DATADOG_API_KEY}"
                         }
                     }
-                }"""
+                }
             }
         }
     
