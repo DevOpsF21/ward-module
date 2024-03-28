@@ -5,5 +5,8 @@
         "node": true,
         "commonjs": true,
         "es6": true
+    },
+    "rules": {
+        "no-unused-vars": "error"
     }
 }
