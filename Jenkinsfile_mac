@@ -23,7 +23,7 @@ pipeline {
             }
         }
 
-        stage('check code for errors using eslint') {
+        stage('Testing: for syntax errors using eslint') {
             steps {
                 script {
                     try {
@@ -108,7 +108,7 @@ pipeline {
             }
         }
 
-        stage('Postman Testing') {
+        stage('Testing: Postman module validation') {
             steps {
                 script {
                     try {
