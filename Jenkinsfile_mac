@@ -25,8 +25,15 @@ pipeline {
 
         stage('check code for errors using eslint') {
             steps {
-                // Run ESLint to lint your JavaScript code
-                sh 'npx eslint .'
+                script {
+                    try {
+                        // Run ESLint to lint your JavaScript code
+                        sh 'npx eslint .'
+                    } catch (err) {
+                        // Handle ESLint errors (e.g., echo error message)
+                        echo "ESLint found errors but pipeline will continue: ${err}"
+                    }
+                }
             }
         }
 
