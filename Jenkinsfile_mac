@@ -23,6 +23,19 @@ pipeline {
             }
         }
 
+        stage('check code for errors using eslint') {
+            steps {
+                // Run ESLint to lint your JavaScript code
+                sh 'npx eslint .'
+            }
+        }
+
+        stage('Building Docker Image') {
+            steps {
+                sh "docker build -t ${IMAGE_FULL_NAME} ."
+            }
+        }
+
         stage('Building Docker Image') {
             steps {
                 sh "docker build -t ${IMAGE_FULL_NAME} ."
