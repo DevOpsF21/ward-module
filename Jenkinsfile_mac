@@ -30,11 +30,6 @@ pipeline {
             }
         }
 
-        stage('Building Docker Image') {
-            steps {
-                sh "docker build -t ${IMAGE_FULL_NAME} ."
-            }
-        }
 
         stage('Building Docker Image') {
             steps {
