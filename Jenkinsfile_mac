@@ -130,5 +130,16 @@ pipeline {
                 }
             }
         }
+        stage('Testing: Kubernetes Security Scan') {
+            steps {
+                snykSecurity(
+                snykInstallation: 'Snyk_security',
+                snykTokenId: 'Snyk_api_token',
+                failOnError: false,
+                failOnIssues: false,
+                additionalArguments: "--all-projects --severity-threshold=high"
+                )
+            }
+        }
     }
 }
