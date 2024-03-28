@@ -14,27 +14,6 @@ pipeline {
     }
 
     stages {
-        stage('Notify Deployment Start') {
-            """
-            steps {
-                script {
-                    if (env.BRANCH_NAME == 'main') {
-                        // Use withCredentials to securely inject the Datadog API key
-                        withCredentials([string(credentialsId: 'datadog-api-key', variable: 'DATADOG_API_KEY')]) {
-                            sh "curl -X POST -H 'Content-type: application/json' " +
-                               "-d '{\"title\": \"Deployment started\", " +
-                               "\"text\": \"Deploying ${env.JOB_NAME} build ${env.BUILD_NUMBER} to Minikube\", " +
-                               "\"priority\": \"normal\", " +
-                               "\"tags\": [\"environment:minikube\", \"branch:${env.BRANCH_NAME}\"], " +
-                               "\"alert_type\": \"info\"}' " +
-                               "https://api.datadoghq.com/api/v1/events?api_key=${DATADOG_API_KEY}"
-                        }
-                    }
-                }"""
-            }
-        }
-    
-    stages {
         stage('Preparation') {
             steps {
                 script {
@@ -58,7 +37,17 @@ pipeline {
             }
         }
 
-        
+        stage('Testing: Postman module validation') {
+            steps {
+                script {
+                    try {
+                        sh "newman run ${POSTMAN_COLLECTION}"
+                    } catch (Exception e) {
+                        echo "Postman tests failed but build continues..."
+                    }
+                }
+            }
+        }
 
         stage('Building Docker Image') {
             steps {
@@ -125,27 +114,6 @@ pipeline {
                     } else {
                         // Apply the deployment and service YAML files
                         sh "kubectl apply -f deployment.yaml -f service.yaml"
-                    }
-                }
-            }
-        }
-
-        stage('Apply Ingress Configuration') {
-            steps {
-                script {
-                    // Apply Ingress resource
-                    sh "kubectl apply -f ingress.yaml"
-                }
-            }
-        }
-
-        stage('Testing: Postman module validation') {
-            steps {
-                script {
-                    try {
-                        sh "newman run ${POSTMAN_COLLECTION}"
-                    } catch (Exception e) {
-                        echo "Postman tests failed but build continues..."
                     }
                 }
             }
